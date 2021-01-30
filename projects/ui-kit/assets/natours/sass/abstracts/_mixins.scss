@@ -1,0 +1,16 @@
+@mixin natours-clearfix{
+  &::after{
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+@mixin natours-center-horizontal-vertical{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@import "../../../common/sass/abstracts/mixins/media-querry-manager";

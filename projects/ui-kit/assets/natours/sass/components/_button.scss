@@ -1,0 +1,104 @@
+
+.natours-button {
+
+
+
+
+
+  &, &:link, &:visited {
+    display: inline-block;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    border-radius: 10rem;
+    backface-visibility: hidden;
+    transition: all 0.2s;
+    position: relative;
+    font-size: $natours-default-font-size;
+
+    //change for the <button> element
+    border: none;
+    cursor: pointer;
+  }
+
+  &:hover {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 1rem 2rem rgba($natours-color-black,0.2);
+
+    &::after{
+      transform: scaleX(1.5) scaleY(1.7);
+      opacity: 0;
+    }
+  }
+
+  &:active, &:focus{
+    outline: none;
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 1rem rgba($natours-color-black,0.2);
+  }
+
+  &--white {
+    color: $natours-color-gray-dark;
+    background-color: $natours-color-white;
+natours-
+    &::after{
+      background-color: $natours-color-white;
+
+    }
+  }
+
+  &--green {
+    color: $natours-color-white;
+    background-color: $natours-color-primary;
+
+    &::after{
+      background-color: $natours-color-primary;
+
+    }
+  }
+
+  &::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+    z-index: -1;
+    transition: all 0.4s;
+  }
+
+  &--animation{
+    animation-name: moveInBottom;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-delay: 0.75s;
+    animation-fill-mode: backwards;
+
+  }
+
+  &-text{
+    &:link, &:visited{
+      font-size: $natours-default-font-size;
+      color: $natours-color-primary;
+      display: inline-block;
+      text-decoration: none;
+      border-bottom: 1px solid $natours-color-primary;
+      padding: 3px;
+      transition: all .2s;
+    }
+    &:hover{
+      color: $natours-color-white;
+      background-color: $natours-color-primary;
+      box-shadow: 0 1rem 2rem rgba($natours-color-black, .15);
+      transform: translateY(-2px);
+    }
+    &:active{
+      box-shadow: 0 .5rem 1rem rgba($natours-color-black, .15);
+      transform: translateY(0px);
+    }
+  }
+}
+

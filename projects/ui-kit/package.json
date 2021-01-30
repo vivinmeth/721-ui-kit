@@ -1,0 +1,37 @@
+{
+  "name": "@vm721/ui-kit",
+  "version": "0.0.3-prealpha",
+  "peerDependencies": {
+    "@angular/common": "^11.1.1",
+    "@angular/core": "^11.1.1"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/vm721/ui-kit.git"
+  },
+  "keywords": [
+    "VM721",
+    "@VM721",
+    "@VM721/ui-kit",
+    "ui-kit",
+    "721",
+    "Design",
+    "Pattern",
+    "Angular",
+    "Angular",
+    "721",
+    "SASS 7:1",
+    "SASS",
+    "BEM"
+  ],
+  "author": "VivinMeth",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/vm721/ui-kit/issues"
+  },
+  "homepage": "https://gitlab.com/vm721/ui-kit#readme"
+
+}
