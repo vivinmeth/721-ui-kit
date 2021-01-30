@@ -5,4 +5,6 @@ import {NatoursSASSInjectComponent} from "./components/natourssassinject/natours
   declarations:[NatoursSASSInjectComponent],
   exports:[NatoursSASSInjectComponent]
 })
-export class NatoursSASSModule{ }
+export class NatoursSASSModule{
+
+}
