@@ -1,10 +1,6 @@
 
 .natours-button {
 
-
-
-
-
   &, &:link, &:visited {
     display: inline-block;
     text-transform: uppercase;
@@ -40,7 +36,7 @@
   &--white {
     color: $natours-color-gray-dark;
     background-color: $natours-color-white;
-natours-
+
     &::after{
       background-color: $natours-color-white;
 
@@ -79,7 +75,7 @@ natours-
 
   }
 
-  &-text{
+  &__text{
     &:link, &:visited{
       font-size: $natours-default-font-size;
       color: $natours-color-primary;

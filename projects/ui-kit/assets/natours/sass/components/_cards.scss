@@ -59,21 +59,21 @@
     border-top-right-radius: 3px;
 
 
-    &--1{
-      background-image: linear-gradient(to right bottom, $natours-color-secondary-light, $natours-color-secondary-dark), url("../img/nat-5.jpg");
-
-
-    }
-
-    &--2{
-      background-image: linear-gradient(to right bottom, $natours-color-primary-light, $natours-color-primary-dark), url("../img/nat-6.jpg");
-
-    }
-
-    &--3{
-      background-image: linear-gradient(to right bottom, $natours-color-tertiary-light, $natours-color-tertiary-dark), url("../img/nat-7.jpg");
-
-    }
+    //&--1{
+    //  background-image: linear-gradient(to right bottom, $natours-color-secondary-light, $natours-color-secondary-dark);
+    //
+    //
+    //}
+    //
+    //&--2{
+    //  background-image: linear-gradient(to right bottom, $natours-color-primary-light, $natours-color-primary-dark), url("../img/nat-6.jpg");
+    //
+    //}
+    //
+    //&--3{
+    //  background-image: linear-gradient(to right bottom, $natours-color-tertiary-light, $natours-color-tertiary-dark), url("../img/nat-7.jpg");
+    //
+    //}
   }
   &__heading{
     font-size: 2.8rem;
