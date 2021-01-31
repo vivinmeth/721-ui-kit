@@ -1,14 +1,17 @@
 import {
-    Directive,
-    ElementRef,
-    OnInit,
-    AfterViewInit,
-    Renderer2,
-    HostListener,
-    HostBinding,
-    Input
+  Directive,
+  ElementRef,
+  OnInit,
+  AfterViewInit,
+  Renderer2,
+  HostListener,
+  HostBinding,
+  Input,
+  OnDestroy
 } from '@angular/core';
 
+import { PointerMapService } from "../../dev-ninja/services/pointer-map.service";
+import { PointerMap } from "../../dev-ninja/pointerMap/pointerMap";
 
 
 enum ToggleModes{
@@ -30,7 +33,7 @@ enum OriginSides {
 @Directive({
     selector: '[commonDropdown]'
 })
-export class DropdownDirective implements OnInit, AfterViewInit {
+export class DropdownDirective implements OnInit, AfterViewInit, OnDestroy {
     dropdownElem: HTMLElement;
     dropdownContentElem: Element;
     dropdownOpen: boolean = false;
@@ -42,12 +45,13 @@ export class DropdownDirective implements OnInit, AfterViewInit {
     @Input() DropdownLeftOriginClass: string = 'dropdown__content--left';
     @Input() DropdownRightOriginClass: string= 'dropdown__content--right'
 
-    domEventListenerHandlers: { [k:string]: EventHandlerNonNull}= {};
+    domEventListenerHandlersMap: PointerMap;
 
 
 
-    constructor(private dropdownElemRef: ElementRef, private renderer: Renderer2) {
+    constructor(private dropdownElemRef: ElementRef, private renderer: Renderer2, private pointerMap: PointerMapService) {
         this.dropdownElem = this.dropdownElemRef.nativeElement
+        this.domEventListenerHandlersMap = this.pointerMap.create(true);
 
     }
 
@@ -82,7 +86,11 @@ export class DropdownDirective implements OnInit, AfterViewInit {
         // console.log('The Elements', this.dropdownElem, this.dropdownContentElem);
     }
 
-    @HostListener('click') onDropdownClick(event: Event) {
+    ngOnDestroy(): void {
+      PointerMapService.clear(this.domEventListenerHandlersMap);
+    }
+
+  @HostListener('click') onDropdownClick(event: Event) {
         // console.log("Binded:", this.DropdownContentElemRef);
         // console.log('dropdown clicked on', event, this.dropdownElem, this.dropdownContentElem);
         this.toggleDropdown();
@@ -97,41 +105,37 @@ export class DropdownDirective implements OnInit, AfterViewInit {
         }
     }
 
-    clickOutsidetoCloses(ev: Event): void {
-        // console.log("clicked outside:", this.dropdownElem, this.dropdownContentElem, ev.target);
-        if(this.dropdownElem.contains(ev.target as HTMLElement) || this.dropdownContentElem.contains(ev.target as HTMLElement)){
-            this.toggleDropdown(ToggleModes.CLOSE);
-        }
-    }
+
 
     OutsideClickHandler(thisArg:this, mode=EventListenerModes.ADD, EID?:string){
-        let randString: string;
-        // do{
-        randString = Math.random().toString();
-        // }while(!this.domEventListenerHandlers[randString])
+
         let EventID: string;
-        let clickOutsidetoClose: EventHandlerNonNull;
-        if (EID && this.domEventListenerHandlers[randString]){
-            EventID = EID;
-            clickOutsidetoClose = thisArg.domEventListenerHandlers[EventID];
+        let clickOutsidetoCloseHandler: any;
+        if (EID){
+          EventID = EID;
+          clickOutsidetoCloseHandler = this.domEventListenerHandlersMap.getPointer(EID);
         }
         else{
-            EventID = randString;
-            clickOutsidetoClose =(ev: Event) => {
+          EventID = this.domEventListenerHandlersMap.createEmptyPointer();
+          clickOutsidetoCloseHandler = this.domEventListenerHandlersMap.useEmptyPointer( EventID,
+            (ev: Event) => {
 
-                if(!thisArg.dropdownElem.contains(ev.target as HTMLElement) && !thisArg.dropdownContentElem.contains(ev.target as HTMLElement)){
-                    // console.log(EventID,"-->clicked outside:", this.dropdownElem, this.dropdownContentElem, ev.target, thisArg.dropdownElem.contains(ev.target as HTMLElement), thisArg.dropdownContentElem.contains(ev.target as HTMLElement));
-                    thisArg.toggleDropdown(ToggleModes.CLOSE, EventID);
-                }
+              if(!thisArg.dropdownElem.contains(ev.target as HTMLElement) && !thisArg.dropdownContentElem.contains(ev.target as HTMLElement)){
+                console.log(EventID,"-->clicked outside:", this.dropdownElem, this.dropdownContentElem, ev.target, thisArg.dropdownElem.contains(ev.target as HTMLElement), thisArg.dropdownContentElem.contains(ev.target as HTMLElement));
+                thisArg.toggleDropdown(ToggleModes.CLOSE, EventID);
+              }
             }
+          );
         }
+
+        console.log('OutsideClickHandler ->', mode, EventID, clickOutsidetoCloseHandler);
+
         if(mode === EventListenerModes.ADD){
-            thisArg.domEventListenerHandlers[EventID] = clickOutsidetoClose;
-            document.addEventListener('click', clickOutsidetoClose);
+
+            document.addEventListener('click', clickOutsidetoCloseHandler[1]);
         }
         else if (mode === EventListenerModes.REMOVE){
-            document.removeEventListener('click', clickOutsidetoClose);
-            this.domEventListenerHandlers[EventID] = undefined;
+            document.removeEventListener('click', clickOutsidetoCloseHandler[1]);
         }
     }
 

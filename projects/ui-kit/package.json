@@ -1,6 +1,6 @@
 {
   "name": "@vm721/ui-kit",
-  "version": "0.0.3-b.1",
+  "version": "0.0.3-rc.1",
   "peerDependencies": {
     "@angular/common": "^11.0.0",
     "@angular/core": "^11.0.0"

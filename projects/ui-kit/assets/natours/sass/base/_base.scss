@@ -38,8 +38,11 @@
 
 }
 
-
-::selection{
+.natours-selection{
   background-color: $natours-color-primary;
   color: $natours-color-white;
 }
+
+//::selection{
+//  @extend .natours-selection;
+//}

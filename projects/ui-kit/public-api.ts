@@ -14,3 +14,8 @@ export * from './natours/natours.module';
 
 export * from './natours/natourssass.module';
 export * from './natours/components/natourssassinject/natourssassinject.component';
+
+
+// @vm721/ui-kit Dev-Ninja
+export * from './dev-ninja/dev-ninja.module';
+export * from './dev-ninja/services/pointer-map.service';

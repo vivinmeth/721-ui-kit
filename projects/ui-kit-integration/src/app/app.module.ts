@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { CommonUIModule, CommonSASSModule, NatoursSASSModule } from '@vm721/ui-kit';
+import { CommonUIModule, CommonSASSModule, NatoursSASSModule, DevNinjaModule } from '@vm721/ui-kit';
 
 import { AppComponent } from './app.component';
 
@@ -14,7 +14,8 @@ import { AppComponent } from './app.component';
     BrowserModule,
     CommonUIModule,
     CommonSASSModule,
-    NatoursSASSModule
+    NatoursSASSModule,
+    DevNinjaModule
   ],
   providers: [],
   bootstrap: [AppComponent]

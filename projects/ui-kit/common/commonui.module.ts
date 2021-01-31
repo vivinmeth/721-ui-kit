@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 
 
 import { DropdownDirective } from "./directives/dropdown.directive";
+import {DevNinjaModule} from "../dev-ninja/dev-ninja.module";
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { DropdownDirective } from "./directives/dropdown.directive";
     DropdownDirective
   ],
   imports: [
+    DevNinjaModule
   ],
   exports: [ DropdownDirective ]
 })
